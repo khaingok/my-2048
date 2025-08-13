@@ -1,0 +1,23 @@
+.tile {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  border-radius: 4px;
+  background-color: #cdc1b4;
+  font-size: 24px;
+}
+
+.tile-2    { background: #eee4da; color: #776e65; }
+.tile-4    { background: #ede0c8; color: #776e65; }
+.tile-8    { background: #f2b179; color: white; }
+.tile-16   { background: #f59563; color: white; }
+.tile-32   { background: #f67c5f; color: white; }
+.tile-64   { background: #f65e3b; color: white; }
+.tile-128  { background: #edcf72; color: white; }
+.tile-256  { background: #edcc61; color: white; }
+.tile-512  { background: #edc850; color: white; }
+.tile-1024 { background: #edc53f; color: white; }
+.tile-2048 { background: #edc22e; color: white; }
