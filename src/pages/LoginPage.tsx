@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import "../styles/LoginPage.css";
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -16,52 +17,50 @@ export default function LoginPage() {
         password
       });
 
-      localStorage.setItem("token", data.token); // Save JWT token
-      localStorage.setItem("userId", data.user._id); // Save user ID
-      navigate("/game"); // Redirect to game
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("userId", data._id);
+      window.dispatchEvent(new Event("storage"));
+      navigate("/game");
     } catch (err: any) {
       setError(err.response?.data?.message || "Login failed");
     }
   };
 
   return (
-    <div style={styles.container}>
-      <h2>Login</h2>
-      <form onSubmit={handleLogin} style={styles.form}>
+    <div className="login-page">
+      <form className="login-form" onSubmit={handleLogin}>
+        <h2 style={{ color: "#00ffe7", marginBottom: "1rem" }}>Login</h2>
+        <label htmlFor="email">Email</label>
         <input
+          id="email"
           type="email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          style={styles.input}
           required
         />
+        <label htmlFor="password">Password</label>
         <input
+          id="password"
           type="password"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          style={styles.input}
           required
         />
-        {error && <p style={styles.error}>{error}</p>}
-        <button type="submit" style={styles.button}>Login</button>
+        {error && <div className="error-message">{error}</div>}
+        <button type="submit">Login</button>
+        <div style={{ marginTop: "0.5rem", color: "#b2fefa" }}>
+          Don't have an account?{" "}
+          <span
+            className="login-link"
+            onClick={() => navigate("/register")}
+            style={{ color: "#00ffe7", cursor: "pointer", textDecoration: "underline" }}
+          >
+            Register here
+          </span>
+        </div>
       </form>
-      <p>
-        Don't have an account?{" "}
-        <span style={styles.link} onClick={() => navigate("/register")}>
-          Register here
-        </span>
-      </p>
     </div>
   );
 }
-
-const styles: { [key: string]: React.CSSProperties } = {
-  container: { maxWidth: 400, margin: "2rem auto", textAlign: "center" },
-  form: { display: "flex", flexDirection: "column", gap: "1rem" },
-  input: { padding: "0.5rem", fontSize: "1rem" },
-  button: { padding: "0.5rem", fontSize: "1rem", cursor: "pointer" },
-  link: { color: "blue", textDecoration: "underline", cursor: "pointer" },
-  error: { color: "red" }
-};

@@ -1,0 +1,52 @@
+.score-page {
+  min-height: 100vh;
+  padding-top: 100px;
+  color: #00ffe7;
+  font-family: 'Orbitron', 'Segoe UI', Arial, sans-serif;
+  text-align: center;
+}
+
+.score-table {
+  margin: 2rem auto;
+  border-collapse: collapse;
+  background: rgba(35,37,38,0.95);
+  box-shadow: 0 0 16px #00ffe7;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.score-table th, .score-table td {
+  padding: 0.7rem 1.2rem;
+  border-bottom: 1px solid #00ffe7;
+}
+
+.score-table th {
+  background: #232526;
+  color: #b2fefa;
+  font-size: 1.1rem;
+}
+
+.score-table tr:last-child td {
+  border-bottom: none;
+}
+
+.score-table td {
+  color: #fff;
+  font-size: 1rem;
+}
+
+.score-delete-btn {
+  background: #ff4e4e;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.3em 0.8em;
+  cursor: pointer;
+  font-family: 'Orbitron', 'Segoe UI', Arial, sans-serif;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+.score-delete-btn:hover {
+  background: #d90000;
+}

@@ -1,0 +1,76 @@
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(90deg, #232526 0%, #414345 100%);
+  font-family: 'Orbitron', 'Segoe UI', Arial, sans-serif;
+}
+
+.login-form {
+  background: rgba(35,37,38,0.95);
+  border-radius: 16px;
+  box-shadow: 0 0 16px #00ffe7, 0 2px 8px rgba(0,255,231,0.15);
+  padding: 2rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  min-width: 300px;
+}
+
+.login-form label {
+  color: #b2fefa;
+  font-size: 1rem;
+  margin-bottom: 0.3rem;
+  letter-spacing: 1px;
+}
+
+.login-form input {
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  border: 2px solid #00ffe7;
+  background: #232526;
+  color: #00ffe7;
+  font-size: 1rem;
+  font-family: inherit;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.login-form input:focus {
+  border-color: #b2fefa;
+}
+
+.login-form button {
+  background: linear-gradient(90deg, #00ffe7 0%, #232526 100%);
+  color: #232526;
+  border: 2px solid #00ffe7;
+  border-radius: 8px;
+  padding: 0.7rem 1.5rem;
+  font-family: inherit;
+  font-size: 1.1rem;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 0 8px #00ffe7;
+  transition: background 0.2s, color 0.2s;
+}
+
+.login-form button:hover {
+  background: #232526;
+  color: #00ffe7;
+}
+
+.login-form .error-message {
+  color: #ff4e4e;
+  font-size: 0.95rem;
+  text-align: center;
+  margin-top: -0.5rem;
+}
+
+@media (max-width: 600px) {
+  .login-form {
+    padding: 1rem 0.7rem;
+    min-width: 220px;
+  }
+}

@@ -192,40 +192,57 @@ export const useGameLogic = () => {
     startGame();
   }, [startGame]);
   
-// const saveGame = async () => {
-//     try {
-//       await axios.post("https://your-backend.vercel.app/api/save-game", {
-//         userId,
-//         board,
-//         score,
-//         bestScore
-//       });
-//       alert("Game saved!");
-//     } catch (err) {
-//       console.error(err);
-//       alert("Failed to save game");
-//     }
-//   };
 
-//   const loadGame = async () => {
-//     try {
-//       const { data } = await axios.get(https://your-backend.vercel.app/api/load-game/${userId});
-//       setBoard(data.board);
-//       setScore(data.score);
-//       setBestScore(data.bestScore);
-//     } catch (err) {
-//       console.error(err);
-//       alert("No saved game found");
-//     }
-//   };
+  // Save game to backend
+  const saveGame = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("You must be logged in to save your game.");
+      return;
+    }
+    try {
+      await axios.post(
+        "http://localhost:5000/api/game",
+        { board, score, bestScore },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      alert("Game saved!");
+    } catch (err) {
+      console.error(err);
+      alert("Failed to save game");
+    }
+  };
+
+  // Load game from backend
+  const loadGame = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("You must be logged in to load your game.");
+      return;
+    }
+    try {
+      const { data } = await axios.get("http://localhost:5000/api/game", {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      setBoard(data.board);
+      setScore(data.score);
+      setGameOver(!hasAnyMoves(data.board));
+      alert("Game loaded!");
+    } catch (err) {
+      console.error(err);
+      alert("No saved game found");
+    }
+  };
 
   return {
     board,
     score,
-    bestScore,    // NEW: exposed for Scoreboard
+    bestScore,
     gameOver,
     move,
     startGame,
-    restart       // NEW: exposed for Controls / GameOverOverlay
+    restart,
+    saveGame,
+    loadGame
   };
 };

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import "../styles/RegisterPage.css";
 
 export default function RegisterPage() {
   const navigate = useNavigate();
@@ -17,58 +18,56 @@ export default function RegisterPage() {
         username,
         password
       });
-      navigate("/login"); // Redirect to login after success
+      navigate("/login");
     } catch (err: any) {
       setError(err.response?.data?.message || "Registration failed");
     }
   };
 
   return (
-    <div style={styles.container}>
-      <h2>Register</h2>
-      <form onSubmit={handleRegister} style={styles.form}>
+    <div className="register-page">
+      <form className="register-form" onSubmit={handleRegister}>
+        <h2 style={{ color: "#00ffe7", marginBottom: "1rem" }}>Register</h2>
+        <label htmlFor="username">Username</label>
         <input
+          id="username"
           type="text"
           placeholder="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          style={styles.input}
           required
         />
+        <label htmlFor="email">Email</label>
         <input
+          id="email"
           type="email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          style={styles.input}
           required
         />
+        <label htmlFor="password">Password</label>
         <input
+          id="password"
           type="password"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          style={styles.input}
           required
         />
-        {error && <p style={styles.error}>{error}</p>}
-        <button type="submit" style={styles.button}>Register</button>
+        {error && <div className="error-message">{error}</div>}
+        <button type="submit">Register</button>
+        <div style={{ marginTop: "0.5rem", color: "#b2fefa" }}>
+          Already have an account?{" "}
+          <span
+            className="register-link"
+            onClick={() => navigate("/login")}
+            style={{ color: "#00ffe7", cursor: "pointer", textDecoration: "underline" }}
+          >
+            Login here
+          </span>
+        </div>
       </form>
-      <p>
-        Already have an account?{" "}
-        <span style={styles.link} onClick={() => navigate("/login")}>
-          Login here
-        </span>
-      </p>
     </div>
   );
 }
-
-const styles: { [key: string]: React.CSSProperties } = {
-  container: { maxWidth: 400, margin: "2rem auto", textAlign: "center" },
-  form: { display: "flex", flexDirection: "column", gap: "1rem" },
-  input: { padding: "0.5rem", fontSize: "1rem" },
-  button: { padding: "0.5rem", fontSize: "1rem", cursor: "pointer" },
-  link: { color: "blue", textDecoration: "underline", cursor: "pointer" },
-  error: { color: "red" }
-};

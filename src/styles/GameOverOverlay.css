@@ -1,30 +1,63 @@
-.overlay {
+.game-over-overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(35, 37, 38, 0.92);
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  z-index: 10;
+  justify-content: center;
+  z-index: 200;
+  border-radius: 16px;
+  box-shadow: 0 0 32px #00ffe7, 0 2px 16px rgba(0,255,231,0.25);
+   text-align: center;
 }
 
-.overlay-content {
+.game-over-title {
+  font-family: 'Orbitron', 'Segoe UI', Arial, sans-serif;
+  font-size: 2.5rem;
+  color: #00ffe7;
+  text-shadow: 0 0 16px #00ffe7, 0 0 4px #fff;
+  margin-bottom: 1.5rem;
+  letter-spacing: 3px;
+  font-weight: 700;
+}
+
+.game-over-score {
+  font-size: 1.5rem;
+  color: #fff;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 8px #00ffe7;
+  font-family: 'Orbitron', 'Segoe UI', Arial, sans-serif;
+}
+
+.game-over-best {
+  font-size: 1.2rem;
+  color: #b2fefa;
+  margin-bottom: 2rem;
+  text-shadow: 0 0 8px #00ffe7;
+  font-family: 'Orbitron', 'Segoe UI', Arial, sans-serif;
   text-align: center;
 }
 
-.overlay-content button {
-  background: #8f7a66;
-  color: white;
-  border: none;
-  padding: 0.8rem 1.5rem;
-  font-size: 1rem;
-  border-radius: 5px;
+.game-over-restart-btn {
+  background: linear-gradient(90deg, #00ffe7 0%, #232526 100%);
+  color: #ffffff;
+  border: 2px solid #00ffe7;
+  border-radius: 8px;
+  padding: 0.7rem 2rem;
+  font-family: 'Orbitron', 'Segoe UI', Arial, sans-serif;
+  font-size: 1.2rem;
   cursor: pointer;
+  box-shadow: 0 0 12px #00ffe7, 0 2px 8px rgba(0,255,231,0.10);
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  font-weight: 700;
 }
 
-.overlay-content button:hover {
-  background: #9c8673;
+.game-over-restart-btn:hover {
+  background: #232526;
+  color: #00ffe7;
+  box-shadow: 0 0 24px #00ffe7;
 }

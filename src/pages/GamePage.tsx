@@ -6,25 +6,42 @@ import GameOverOverlay from "../components/GameOverOverlay";
 import { useGameLogic } from "../hooks/useGameLogic";
 import "../styles/Board.css";
 import "../styles/Tile.css";
+import "../styles/GamePage.css";
+import axios from "axios";
 
 export default function GamePage() {
   const { board, score, bestScore, gameOver, restart, saveGame, loadGame } = useGameLogic();
 
+  React.useEffect(() => {
+    if (gameOver) {
+      const token = localStorage.getItem("token");
+      if (token) {
+        axios.post(
+          "http://localhost:5000/api/score",
+          { score , bestScore },
+          { headers: { Authorization: `Bearer ${token}` } }
+        ).catch(err => {
+          console.error("Failed to save finished score", err);
+        });
+      }
+    }
+  }, [gameOver, score, bestScore]);
+
   return (
-    <div style={{ textAlign: "center", marginTop: "2rem", position: "relative" }}>
-      <h1>2048 Game</h1>
-      <Scoreboard score={score} bestScore={bestScore} />
-      <div style={{ display: "inline-block", position: "relative" }}>
+    <div className="game-page">
+      <div className="score">
+        <Scoreboard score={score} bestScore={bestScore} />
+      </div>
+      <div className="board-container">
         <Board board={board} />
       </div>
-      <Controls onRestart={restart} />
-
-      {/* Save & Load Buttons */}
-      <div style={{ marginTop: "1rem" }}>
-        <button onClick={saveGame} style={{ marginRight: "0.5rem" }}>💾 Save Game</button>
+      <div className="controls">
+        <Controls onRestart={restart} />
+      </div>
+      <div className="save-load-buttons">
+        <button onClick={saveGame}>💾 Save Game</button>
         <button onClick={loadGame}>📂 Load Game</button>
       </div>
-
       {gameOver && <GameOverOverlay onRestart={restart} score={score} bestScore={bestScore} />}
     </div>
   );

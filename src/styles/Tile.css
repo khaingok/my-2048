@@ -1,23 +1,28 @@
 .tile {
-  width: 80px;
-  height: 80px;
+  background: #232526;
+  color: #00ffe7;
+  border-radius: 8px;
+  font-family: 'Orbitron', 'Segoe UI', Arial, sans-serif;
+  font-size: 1.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: bold;
-  border-radius: 4px;
-  background-color: #cdc1b4;
-  font-size: 24px;
+  box-shadow: 0 2px 8px rgba(0,255,231,0.10);
+  transition: background 0.2s, color 0.2s;
 }
 
-.tile-2    { background: #eee4da; color: #776e65; }
-.tile-4    { background: #ede0c8; color: #776e65; }
-.tile-8    { background: #f2b179; color: white; }
-.tile-16   { background: #f59563; color: white; }
-.tile-32   { background: #f67c5f; color: white; }
-.tile-64   { background: #f65e3b; color: white; }
-.tile-128  { background: #edcf72; color: white; }
-.tile-256  { background: #edcc61; color: white; }
-.tile-512  { background: #edc850; color: white; }
-.tile-1024 { background: #edc53f; color: white; }
-.tile-2048 { background: #edc22e; color: white; }
+.tile-2    { background: #222d32; color: #b2fefa; }
+.tile-4    { background: #1a2980; color: #f0f0f0; }
+.tile-8    { background: #009ffd; color: #fff; }
+.tile-16   { background: #2a5298; color: #fff; }
+.tile-32   { background: #00c6ff; color: #232526; }
+.tile-64   { background: #43cea2; color: #232526; }
+.tile-128  { background: #185a9d; color: #fff; }
+.tile-256  { background: #f7971e; color: #232526; }
+.tile-512  { background: #ffd200; color: #232526; }
+.tile-1024 { background: #f953c6; color: #232526; }
+.tile-2048 { background: #00ffe7; color: #232526; }
+
+.tile-1024, .tile-2048 {
+  box-shadow: 0 0 16px #00ffe7, 0 2px 8px rgba(0,255,231,0.20);
+}

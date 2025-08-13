@@ -12,8 +12,6 @@ const Controls: React.FC<Props> = ({ onRestart }) => {
         style={{
           padding: "8px 14px",
           borderRadius: 6,
-          background: "#8f7a66",
-          color: "#fff",
           border: "none",
           cursor: "pointer",
         }}
