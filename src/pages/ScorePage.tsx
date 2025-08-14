@@ -1,6 +1,6 @@
 import{ useState, useEffect } from "react";
 import axios from "axios";
-import "./styles/ScorePage.css";
+import "../styles/scorePage.css";
 
 type ScoreItem = {
   _id?: string;
