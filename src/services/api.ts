@@ -1,14 +1,14 @@
 const API_BASE = import.meta.env.VITE_API_BASE || '/api';
 
 export async function getHighScores() {
-  const res = await fetch(`${API_BASE}/score`);
+  const res = await fetch(`${API_BASE}/api/score`);
   if (!res.ok) throw new Error("Failed to fetch scores");
   return res.json();
 }
 
 export async function postScore(score: number, bestScore?: number) {
   const token = localStorage.getItem("token");
-  const res = await fetch(`${API_BASE}/score`, {
+  const res = await fetch(`${API_BASE}/api/score`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -22,7 +22,7 @@ export async function postScore(score: number, bestScore?: number) {
 
 export async function getUserBestScore() {
   const token = localStorage.getItem("token");
-  const res = await fetch(`${API_BASE}/score/best`, {
+  const res = await fetch(`${API_BASE}/api/score/best`, {
     headers: { Authorization: `Bearer ${token}` }
   });
   if (!res.ok) throw new Error("Failed to fetch best score");
