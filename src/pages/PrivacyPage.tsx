@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "../styles/PrivacyPage.css";
+const API_BASE = import.meta.env.VITE_API_BASE;
 
 export default function PrivacyPage() {
   const [oldPassword, setOldPassword] = useState("");
@@ -17,7 +18,7 @@ export default function PrivacyPage() {
     const token = localStorage.getItem("token");
     try {
       await axios.put(
-        "http://localhost:5000/api/users/password",
+        `${API_BASE}/api/users/password`,
         { oldPassword, newPassword },
         { headers: { Authorization: `Bearer ${token}` } }
       );

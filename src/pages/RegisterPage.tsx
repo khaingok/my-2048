@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../styles/RegisterPage.css";
+const API_BASE = import.meta.env.VITE_API_BASE;
+
 
 export default function RegisterPage() {
   const navigate = useNavigate();
@@ -13,7 +15,7 @@ export default function RegisterPage() {
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/api/users/register", {
+      await axios.post(`${API_BASE}/api/users/register`, {
         email,
         username,
         password

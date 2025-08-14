@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../styles/LoginPage.css";
+const API_BASE = import.meta.env.VITE_API_BASE;
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ export default function LoginPage() {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("http://localhost:5000/api/users/login", {
+      const { data } = await axios.post(`${API_BASE}/api/users/login`, {
         email,
         password
       });

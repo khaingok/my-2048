@@ -22,7 +22,7 @@ export async function postScore(score: number, bestScore?: number) {
 
 export async function getUserBestScore() {
   const token = localStorage.getItem("token");
-  const res = await fetch(`/api/score/best`, {
+  const res = await fetch(`${API_BASE}/score/best`, {
     headers: { Authorization: `Bearer ${token}` }
   });
   if (!res.ok) throw new Error("Failed to fetch best score");

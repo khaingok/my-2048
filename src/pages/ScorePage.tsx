@@ -1,6 +1,7 @@
 import{ useState, useEffect } from "react";
 import axios from "axios";
 import "../styles/scorePage.css";
+const API_BASE = import.meta.env.VITE_API_BASE;
 
 type ScoreItem = {
   _id?: string;
@@ -20,7 +21,7 @@ export default function ScorePage() {
   const fetchScores = () => {
     const token = localStorage.getItem("token");
     axios
-      .get("http://localhost:5000/api/score", {
+      .get(`${API_BASE}/api/score`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
@@ -34,7 +35,7 @@ export default function ScorePage() {
     if (!id) return;
     const token = localStorage.getItem("token");
     try {
-      await axios.delete(`http://localhost:5000/api/score/${id}`, {
+      await axios.delete(`${API_BASE}/api/score/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setScores(scores.filter((item) => item._id !== id));
