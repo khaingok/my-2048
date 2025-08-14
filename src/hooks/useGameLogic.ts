@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
+const API_BASE = import.meta.env.VITE_API_BASE;
 
 type Board = number[][];
 type Direction = "up" | "down" | "left" | "right";
@@ -202,7 +203,7 @@ export const useGameLogic = () => {
     }
     try {
       await axios.post(
-        "http://localhost:5000/api/game",
+        `${API_BASE}/api/game`,
         { board, score, bestScore },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -221,7 +222,7 @@ export const useGameLogic = () => {
       return;
     }
     try {
-      const { data } = await axios.get("http://localhost:5000/api/game", {
+      const { data } = await axios.get(`${API_BASE}/api/game`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setBoard(data.board);
