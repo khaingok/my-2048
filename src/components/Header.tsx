@@ -1,10 +1,43 @@
 import { Link, useNavigate } from "react-router-dom";
 import React, { useRef, useEffect } from "react";
+import { jwtDecode } from "jwt-decode";
 import "../styles/Header.css";
 
 export default function Header() {
-  const [isLoggedIn, setIsLoggedIn] = React.useState(!!localStorage.getItem("token"));
+  const [isLoggedIn, setIsLoggedIn] = React.useState(() => {
+    const token = localStorage.getItem("token");
+    if (!token) return false;
+    try {
+      const decoded: { exp: number } = jwtDecode(token);
+      return decoded.exp * 1000 > Date.now();
+    } catch {
+      return false;
+    }
+  });
   const [panelOpen, setPanelOpen] = React.useState(false);
+
+  React.useEffect(() => {
+    const checkToken = () => {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        setIsLoggedIn(false);
+        return;
+      }
+      try {
+        const decoded: { exp: number } = jwtDecode(token);
+        setIsLoggedIn(decoded.exp * 1000 > Date.now());
+      } catch {
+        setIsLoggedIn(false);
+      }
+    };
+    window.addEventListener("storage", checkToken);
+    const interval = setInterval(checkToken, 1000); // Check every second
+    return () => {
+      window.removeEventListener("storage", checkToken);
+      clearInterval(interval);
+    };
+  }, []);
+  
   const navigate = useNavigate();
   const panelRef = useRef<HTMLDivElement>(null);
 
@@ -38,7 +71,14 @@ export default function Header() {
 
   return (
     <header className="header">
-      <h1>2048 Game</h1>
+      <h1>
+        <span
+          style={{ cursor: "pointer", color: "#00ffe7", textShadow: "0 0 8px #00ffe7, 0 0 2px #fff" }}
+          onClick={() => navigate("/game")}
+        >
+          2048 Game
+        </span>
+      </h1>
       <div className="header-actions">
         {!isLoggedIn ? (
           <>
@@ -53,7 +93,7 @@ export default function Header() {
               onClick={handleAvatarClick}
               style={{
                 border: "none",
-                background: "rgba(35,37,38,0.3)",
+                background: "rgba(255, 255, 255, 1)",
                 padding: 0,
                 cursor: "pointer"
               }}

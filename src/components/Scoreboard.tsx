@@ -1,21 +1,15 @@
 import React from "react";
 
-interface Props {
+interface ScoreboardProps {
   score: number;
   bestScore: number;
 }
 
-const Scoreboard: React.FC<Props> = ({ score, bestScore }) => {
+const Scoreboard: React.FC<ScoreboardProps> = ({ score, bestScore }) => {
   return (
     <div className="scoreboard">
-      <div>
-        <span className="scoreboard-label">Score</span>
-        <span className="scoreboard-value">{score}</span>
-      </div>
-      <div>
-        <span className="scoreboard-label">Best</span>
-        <span className="scoreboard-value">{bestScore}</span>
-      </div>
+      <div>Score: {score}</div>
+      <div>Best: {bestScore}</div>
     </div>
   );
 };

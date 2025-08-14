@@ -7,30 +7,35 @@ import { useGameLogic } from "../hooks/useGameLogic";
 import "../styles/Board.css";
 import "../styles/Tile.css";
 import "../styles/GamePage.css";
-import axios from "axios";
+import { postScore, getUserBestScore } from "../services/api";
 
 export default function GamePage() {
-  const { board, score, bestScore, gameOver, restart, saveGame, loadGame } = useGameLogic();
+  const { board, score, gameOver, restart, saveGame, loadGame } = useGameLogic();
+  const [userBestScore, setUserBestScore] = React.useState<number>(0);
+
+  // Fetch best score from DB on mount and after game over
+  React.useEffect(() => {
+    getUserBestScore()
+      .then(data => setUserBestScore(data.bestScore))
+      .catch(() => setUserBestScore(0));
+  }, []);
 
   React.useEffect(() => {
     if (gameOver) {
-      const token = localStorage.getItem("token");
-      if (token) {
-        axios.post(
-          "http://localhost:5000/api/score",
-          { score , bestScore },
-          { headers: { Authorization: `Bearer ${token}` } }
-        ).catch(err => {
-          console.error("Failed to save finished score", err);
-        });
-      }
+      postScore(score, userBestScore).catch(err => {
+        console.error("Failed to save finished score", err);
+      });
+      // Refetch best score after posting
+      getUserBestScore()
+        .then(data => setUserBestScore(data.bestScore))
+        .catch(() => {});
     }
-  }, [gameOver, score, bestScore]);
+  }, [gameOver, score, userBestScore]);
 
   return (
     <div className="game-page">
       <div className="score">
-        <Scoreboard score={score} bestScore={bestScore} />
+        <Scoreboard score={score} bestScore={userBestScore} />
       </div>
       <div className="board-container">
         <Board board={board} />
@@ -42,7 +47,7 @@ export default function GamePage() {
         <button onClick={saveGame}>💾 Save Game</button>
         <button onClick={loadGame}>📂 Load Game</button>
       </div>
-      {gameOver && <GameOverOverlay onRestart={restart} score={score} bestScore={bestScore} />}
+      {gameOver && <GameOverOverlay onRestart={restart} score={score} bestScore={userBestScore} />}
     </div>
   );
 }

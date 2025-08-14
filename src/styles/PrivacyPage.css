@@ -1,0 +1,55 @@
+.privacy-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(90deg, #232526 0%, #414345 100%);
+}
+
+.privacy-form {
+  background: rgba(35,37,38,0.95);
+  border-radius: 16px;
+  box-shadow: 0 0 16px #00ffe7;
+  padding: 2rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  min-width: 300px;
+  color: #00ffe7;
+  font-family: 'Orbitron', 'Segoe UI', Arial, sans-serif;
+}
+
+.privacy-form label {
+  color: #b2fefa;
+  font-size: 1rem;
+  margin-bottom: 0.3rem;
+}
+
+.privacy-form input {
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  border: 2px solid #00ffe7;
+  background: #232526;
+  color: #00ffe7;
+  font-size: 1rem;
+  font-family: inherit;
+  outline: none;
+}
+
+.privacy-form button {
+  background: linear-gradient(90deg, #00ffe7 0%, #232526 100%);
+  color: #ffffff;
+  border: 2px solid #00ffe7;
+  border-radius: 8px;
+  padding: 0.7rem 1.5rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 0 8px #00ffe7;
+}
+
+.privacy-message {
+  color: #b2fefa;
+  text-align: center;
+  margin-top: 0.5rem;
+}

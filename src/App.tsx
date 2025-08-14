@@ -5,7 +5,8 @@ import RegisterPage from "./pages/RegisterPage";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ScorePage from "./pages/ScorePage";
-
+import ProtectedRoute from "./components/ProtectedRoute";
+import PrivacyPage from "./pages/PrivacyPage";
 
 
 export default function App() {
@@ -13,13 +14,34 @@ export default function App() {
     <Router>
       <Header />
       <Routes>
-      <Route path="/" element={<Navigate to="/login" />} />
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/register" element={<RegisterPage />} />
-      <Route path="/game" element={<GamePage />} />
-      <Route path="/score" element={<ScorePage />} />
-    </Routes>
-    <Footer />
+        <Route path="/" element={<Navigate to="/login" />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route
+          path="/game"
+          element={
+            <ProtectedRoute>
+              <GamePage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/score"
+          element={
+            <ProtectedRoute>
+              <ScorePage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/privacy"
+          element={
+          <ProtectedRoute>
+            <PrivacyPage />
+          </ProtectedRoute>
+          }/>
+      </Routes>
+      <Footer />
     </Router>
   );
 }

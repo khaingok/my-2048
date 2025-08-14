@@ -15,7 +15,6 @@ export default function ScorePage() {
 
   useEffect(() => {
     fetchScores();
-    // eslint-disable-next-line
   }, []);
 
   const fetchScores = () => {
