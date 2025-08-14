@@ -5,7 +5,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/api': 'http://localhost:5000'  // dev proxy to backend
+      '/api': 'https://two048-backend-1ofh.onrender.com'  // dev proxy to backend
     }
   }
 });
